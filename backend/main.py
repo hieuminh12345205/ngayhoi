@@ -8,12 +8,15 @@ from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, ConfigDict, Field
 
-DB_PATH = Path(os.environ.get("NGAYHOI_DB", Path(__file__).with_name("ngayhoi.db")))
+DB_PATH = os.getenv("DB_PATH", os.getenv("NGAYHOI_DB", str(Path(__file__).with_name("ngayhoi.db"))))
+MEMORY_URI = "file:ngayhoi-test?mode=memory&cache=shared"
 
 
 @contextmanager
 def connect():
-    db = sqlite3.connect(DB_PATH, timeout=10)
+    # Giữ CSDL :memory: chung cho các kết nối trong một lượt TestClient.
+    memory = str(DB_PATH) == ":memory:"
+    db = sqlite3.connect(MEMORY_URI if memory else DB_PATH, uri=memory, timeout=10)
     try:
         with db:
             yield db
@@ -36,8 +39,13 @@ def init_db():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    init_db()
-    yield
+    keeper = sqlite3.connect(MEMORY_URI, uri=True) if str(DB_PATH) == ":memory:" else None
+    try:
+        init_db()
+        yield
+    finally:
+        if keeper is not None:
+            keeper.close()
 
 
 app = FastAPI(title="Ngày hội việc làm", version="1.0.0", lifespan=lifespan)
