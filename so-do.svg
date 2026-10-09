@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="680" viewBox="0 0 1100 680">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#60836c"/></marker><style>text{font-family:Arial,sans-serif;fill:#214633} .box{fill:#fff;stroke:#a9bfa5;stroke-width:1.5} .line{fill:none;stroke:#60836c;stroke-width:2;marker-end:url(#a)} .title{font-size:24px;font-weight:bold} .h{font-size:17px;font-weight:bold} .p{font-size:14px} .label{font-size:13px;fill:#607560}</style></defs>
+<rect width="1100" height="680" fill="#f5f7ef"/><text x="45" y="48" class="title">CỔNG ĐĂNG KÝ NGÀY HỘI VIỆC LÀM</text><text x="45" y="75" class="label">CSE3051 · Buổi 3 · Mã sinh viên 23110198</text>
+<rect class="box" x="45" y="115" width="260" height="110" rx="12"/><text x="65" y="148" class="h">React + Vite</text><text x="65" y="177" class="p">http://localhost:5173</text><text x="65" y="203" class="p">Nhập ma_sv · chọn ma_phien</text>
+<path class="line" d="M305 170H420"/><text x="317" y="144" class="label">POST JSON</text>
+<rect class="box" x="420" y="115" width="280" height="110" rx="12"/><text x="440" y="148" class="h">FastAPI + CORSMiddleware</text><text x="440" y="177" class="p">localhost:8000/api/dang-ky</text><text x="440" y="203" class="p">Origin: http://localhost:5173</text>
+<path class="line" d="M700 170H790"/>
+<rect class="box" x="790" y="115" width="265" height="110" rx="12"/><text x="810" y="148" class="h">Pydantic: DangKy</text><text x="810" y="177" class="p">ma_sv, ma_phien bắt buộc</text><text x="810" y="203" class="p">Kiểm tra dữ liệu gửi lên</text>
+<path class="line" d="M920 225V290H740"/><text x="922" y="265" class="label">Hợp lệ</text>
+<rect class="box" x="420" y="255" width="320" height="125" rx="12"/><text x="440" y="288" class="h">SQLite: ngayhoi.db</text><text x="440" y="319" class="p">INSERT có tham số</text><text x="440" y="349" class="p">UNIQUE(ma_sv, ma_phien)</text>
+<path class="line" d="M580 380V425H265V460"/><text x="270" y="415" class="label">Ghi thành công</text><path class="line" d="M580 380V460"/><text x="599" y="425" class="label">Trùng cặp mã</text><path class="line" d="M1055 170H1075V420H915V460"/><text x="924" y="411" class="label">Thiếu / sai dữ liệu</text>
+<rect x="120" y="460" width="290" height="110" rx="12" fill="#e6f3e5" stroke="#9abd98"/><text x="140" y="496" class="h">HTTP 201 · {ok: true}</text><text x="140" y="528" class="p">Giao diện: Đăng ký thành công</text>
+<rect x="435" y="460" width="300" height="110" rx="12" fill="#fff3d9" stroke="#d8ba72"/><text x="455" y="496" class="h">HTTP 409 · DA_DANG_KY</text><text x="455" y="528" class="p">Giao diện: Bạn đã đăng ký phiên này</text>
+<rect x="760" y="460" width="295" height="110" rx="12" fill="#ffeaea" stroke="#d6a4a4"/><text x="780" y="496" class="h">HTTP 422 · Validation error</text><text x="780" y="528" class="p">Giao diện: Kiểm tra lại dữ liệu</text>
+<text x="45" y="620" class="p">Trạng thái ban đầu: Chưa gửi → Đang gửi → Thành công / Đã đăng ký / Lỗi.</text><text x="45" y="648" class="label">UNIQUE đảm bảo chống trùng cả khi gửi đồng thời; dữ liệu SQLite tồn tại qua lần khởi động sau.</text>
+</svg>

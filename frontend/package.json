@@ -1,0 +1,9 @@
+{
+  "name": "ngay-hoi-viec-lam",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": { "dev": "vite --host localhost --port 5173 --strictPort", "build": "vite build" },
+  "dependencies": { "react": "^19.0.0", "react-dom": "^19.0.0" },
+  "devDependencies": { "vite": "^7.0.0" }
+}
