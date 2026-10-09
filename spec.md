@@ -19,4 +19,4 @@ giao dịch giữ khóa ghi SQLite. Giữ UNIQUE(ma_sv, ma_phien) của Buổi 3
 
 Ngoài phạm vi: hủy đăng ký, danh sách chờ, xác thực tài khoản, thay đổi sức
 chứa, thay đổi lịch phiên, sinh lại giao diện bằng v0.dev. Bài Buổi 4 tập trung
-backend, kiểm thử và Git; giữ nguyên frontend Buổi 3.
+backend, kiểm thử và Git. Giao diện chỉ bổ sung phân biệt HET_CHO và DA_DANG_KY.

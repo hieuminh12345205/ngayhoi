@@ -73,11 +73,24 @@ class KetQua(BaseModel):
     status_code=status.HTTP_201_CREATED,
     response_model=KetQua,
     summary="Đăng ký một phiên",
-    responses={409: {"description": "Đã đăng ký cùng mã sinh viên và mã phiên"}},
+    responses={409: {"description": "DA_DANG_KY (ưu tiên) hoặc HET_CHO khi phiên đủ 30"}},
 )
 def dang_ky(data: DangKy):
     try:
         with connect() as db:
+            # Giữ khóa ghi trước SELECT: kiểm tra và INSERT cùng một giao dịch.
+            db.execute("BEGIN IMMEDIATE")
+            existed = db.execute(
+                "SELECT 1 FROM dang_ky WHERE ma_sv = ? AND ma_phien = ?",
+                (data.ma_sv, data.ma_phien),
+            ).fetchone()
+            if existed:
+                raise HTTPException(status_code=409, detail="DA_DANG_KY")
+            count = db.execute(
+                "SELECT COUNT(*) FROM dang_ky WHERE ma_phien = ?", (data.ma_phien,)
+            ).fetchone()[0]
+            if count >= 30:
+                raise HTTPException(status_code=409, detail="HET_CHO")
             db.execute(
                 "INSERT INTO dang_ky (ma_sv, ma_phien) VALUES (?, ?)",
                 (data.ma_sv, data.ma_phien),

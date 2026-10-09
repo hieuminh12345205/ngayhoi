@@ -1,4 +1,7 @@
-# Bài thực hành Buổi 3 — Cổng đăng ký Ngày hội việc làm
+# Hướng dẫn nền Buổi 3 — Cổng đăng ký Ngày hội việc làm
+
+**Đây là bản nền Buổi 3. Bài hiện tại là Buổi 4:** xem [README-B4.md](README-B4.md)
+cho giới hạn 30 chỗ, 5 test, thí nghiệm đồng thời và lịch sử Git.
 
 Mã sinh viên: **23110198**. Bộ mã nguồn FastAPI + SQLite, React + Vite.
 
