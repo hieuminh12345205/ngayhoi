@@ -10,6 +10,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 DB_PATH = os.getenv("DB_PATH", os.getenv("NGAYHOI_DB", str(Path(__file__).with_name("ngayhoi.db"))))
 MEMORY_URI = "file:ngayhoi-test?mode=memory&cache=shared"
+SUC_CHUA = 30
 
 
 @contextmanager
@@ -89,7 +90,7 @@ def dang_ky(data: DangKy):
             count = db.execute(
                 "SELECT COUNT(*) FROM dang_ky WHERE ma_phien = ?", (data.ma_phien,)
             ).fetchone()[0]
-            if count >= 30:
+            if count >= SUC_CHUA:
                 raise HTTPException(status_code=409, detail="HET_CHO")
             db.execute(
                 "INSERT INTO dang_ky (ma_sv, ma_phien) VALUES (?, ?)",

@@ -1,5 +1,7 @@
 # Hướng dẫn nền Buổi 3 — Cổng đăng ký Ngày hội việc làm
 
+**Buổi 5:** xem [README-B5.md](README-B5.md) cho GitHub, CI và quy trình PR.
+
 **Đây là bản nền Buổi 3. Bài hiện tại là Buổi 4:** xem [README-B4.md](README-B4.md)
 cho giới hạn 30 chỗ, 5 test, thí nghiệm đồng thời và lịch sử Git.
 
