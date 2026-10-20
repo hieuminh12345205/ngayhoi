@@ -8,12 +8,16 @@ from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, ConfigDict, Field
 
-DB_PATH = Path(os.environ.get("NGAYHOI_DB", Path(__file__).with_name("ngayhoi.db")))
+DB_PATH = os.getenv("DB_PATH", os.getenv("NGAYHOI_DB", str(Path(__file__).with_name("ngayhoi.db"))))
+MEMORY_URI = "file:ngayhoi-test?mode=memory&cache=shared"
+SUC_CHUA = 30
 
 
 @contextmanager
 def connect():
-    db = sqlite3.connect(DB_PATH, timeout=10)
+    # Giữ CSDL :memory: chung cho các kết nối trong một lượt TestClient.
+    memory = str(DB_PATH) == ":memory:"
+    db = sqlite3.connect(MEMORY_URI if memory else DB_PATH, uri=memory, timeout=10)
     try:
         with db:
             yield db
@@ -36,8 +40,13 @@ def init_db():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    init_db()
-    yield
+    keeper = sqlite3.connect(MEMORY_URI, uri=True) if str(DB_PATH) == ":memory:" else None
+    try:
+        init_db()
+        yield
+    finally:
+        if keeper is not None:
+            keeper.close()
 
 
 app = FastAPI(title="Ngày hội việc làm", version="1.0.0", lifespan=lifespan)
@@ -65,11 +74,24 @@ class KetQua(BaseModel):
     status_code=status.HTTP_201_CREATED,
     response_model=KetQua,
     summary="Đăng ký một phiên",
-    responses={409: {"description": "Đã đăng ký cùng mã sinh viên và mã phiên"}},
+    responses={409: {"description": "DA_DANG_KY (ưu tiên) hoặc HET_CHO khi phiên đủ 30"}},
 )
 def dang_ky(data: DangKy):
     try:
         with connect() as db:
+            # Giữ khóa ghi trước SELECT: kiểm tra và INSERT cùng một giao dịch.
+            db.execute("BEGIN IMMEDIATE")
+            existed = db.execute(
+                "SELECT 1 FROM dang_ky WHERE ma_sv = ? AND ma_phien = ?",
+                (data.ma_sv, data.ma_phien),
+            ).fetchone()
+            if existed:
+                raise HTTPException(status_code=409, detail="DA_DANG_KY")
+            count = db.execute(
+                "SELECT COUNT(*) FROM dang_ky WHERE ma_phien = ?", (data.ma_phien,)
+            ).fetchone()[0]
+            if count >= SUC_CHUA:
+                raise HTTPException(status_code=409, detail="HET_CHO")
             db.execute(
                 "INSERT INTO dang_ky (ma_sv, ma_phien) VALUES (?, ?)",
                 (data.ma_sv, data.ma_phien),

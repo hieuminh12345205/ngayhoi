@@ -11,4 +11,5 @@ dist/
 *.db-wal
 *.db-shm
 evidence-b4/
+evidence-b5/
 *.bundle
