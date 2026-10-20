@@ -1,10 +1,11 @@
 """Cổng đăng ký Ngày hội việc làm — FastAPI + SQLite."""
 from contextlib import asynccontextmanager, contextmanager
 from pathlib import Path
+from typing import Annotated
 import os
 import sqlite3
 
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, HTTPException, Query, status
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -54,7 +55,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],
     allow_credentials=False,
-    allow_methods=["POST"],
+    allow_methods=["POST", "GET"],
     allow_headers=["Content-Type"],
 )
 
@@ -67,6 +68,19 @@ class DangKy(BaseModel):
 
 class KetQua(BaseModel):
     ok: bool
+
+
+@app.get("/api/con-cho", summary="Số chỗ còn lại của một phiên")
+def con_cho(
+    ma_phien: Annotated[
+        str, Query(min_length=1, max_length=30, pattern=r"^[A-Za-z0-9_-]+$")
+    ],
+) -> dict[str, int]:
+    with connect() as db:
+        count = db.execute(
+            "SELECT COUNT(*) FROM dang_ky WHERE ma_phien = ?", (ma_phien,)
+        ).fetchone()[0]
+    return {"con_cho": max(0, SUC_CHUA - count)}
 
 
 @app.post(
