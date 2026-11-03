@@ -1,4 +1,4 @@
-# Bài thực hành Buổi 3 — Cổng đăng ký Ngày hội việc làm
+# Bài thực hành Buổi 3-4-5, học phần: AI Toolkit, Cổng đăng ký Ngày hội việc làm
 
 Mã sinh viên: **23110198**. Bộ mã nguồn FastAPI + SQLite, React + Vite.
 
