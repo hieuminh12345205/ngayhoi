@@ -106,11 +106,14 @@ Sổ tài sản ghi công cụ `app/poster.py`, seed 48213, prompt, ngày 2026-1
 ## Bước 8 · Quy trình nhóm
 
 - Git: hai commit theo đúng thứ tự "test trước, mã sau" — `test: đặc tả và 24 test` (chỉ `spec.md`, `tests/`, `data/`), rồi `feat: hệ thống ngày hội tích hợp AI` kèm dòng `AI-assisted:`. Xem `git log` trong thư mục nộp.
-- **Chưa làm:** đẩy lên GitHub, bật branch protection, chạy CI (`.github/workflows/test.yml`) và `docker compose up -d --build`. Máy em không cài Docker và em chưa tạo kho GitHub cho bài này, nên không có bằng chứng cho các mục đó.
+- GitHub: đẩy lên kho `https://github.com/hieuminh12345205/ngayhoi` (kho public, đã có sẵn bài các buổi trước ở `master`). Bài này nằm ở nhánh riêng `th-tong-hop`; `master` và các nhánh cũ giữ nguyên.
+- Pull request: [#3](https://github.com/hieuminh12345205/ngayhoi/pull/3) `docs: lưu ý chạy trên Windows (bảng mã và phông poster)`, từ nhánh `docs/chay-tren-windows` vào `th-tong-hop`, 1 commit, chỉ thêm 16 dòng vào `README.md`. Lúc viết báo cáo PR còn mở, chưa gộp.
+- CI: workflow `.github/workflows/test.yml` chạy trên PR #3, lần chạy [43746506888](https://github.com/hieuminh12345205/ngayhoi/actions/runs/43746506888), job `pytest` trên `ubuntu-latest`, commit `9bda984`, kết luận **success** (16/11/2026 01:23–01:24 giờ Việt Nam). Cả hai bước `pip install -r requirements.txt` và `python -m pytest -q` đều xanh. Trên Linux test poster qua mà không cần đặt biến phông như trên Windows. Em lấy kết quả này từ API công khai của GitHub (trạng thái từng bước), không chép được dòng log `24 passed` của CI vào đây.
+- **Chưa làm:** bật branch protection, `docker compose up -d --build` (máy em không cài Docker), và gộp PR #3. Không có bằng chứng cho các mục đó.
 
 ## Ghi nhận sử dụng AI
 
-Em dùng trợ lý AI (Claude Code) để chạy các lệnh theo hướng dẫn, chụp ảnh giao diện bằng Edge chạy ẩn, và soạn bản nháp báo cáo này từ kết quả thật. Trợ lý không viết hay sửa mã của hệ thống. Các tệp `.png` cùng tên với tệp `.txt` (ví dụ `02-dong-thoi.png`) là ảnh kết xuất từ đúng nội dung tệp `.txt`, không phải ảnh chụp màn hình cửa sổ lệnh; các tệp `ui-*.png` là ảnh chụp trang thật. Riêng ảnh tab Trợ lý, khung hội thoại được kéo dài để thấy hết cuộc trao đổi.
+Em dùng trợ lý AI (Claude Code) để chạy các lệnh theo hướng dẫn, chụp ảnh giao diện bằng Edge chạy ẩn, và soạn bản nháp báo cáo này từ kết quả thật. Trợ lý không viết hay sửa mã của hệ thống. Trợ lý cũng đẩy hai nhánh lên GitHub và soạn mục "Lưu ý khi chạy trên Windows" trong `README.md` (PR #3); em tự mở PR trên GitHub. Các tệp `.png` cùng tên với tệp `.txt` (ví dụ `02-dong-thoi.png`) là ảnh kết xuất từ đúng nội dung tệp `.txt`, không phải ảnh chụp màn hình cửa sổ lệnh; các tệp `ui-*.png` là ảnh chụp trang thật. Riêng ảnh tab Trợ lý, khung hội thoại được kéo dài để thấy hết cuộc trao đổi.
 
 ## Phạm vi kết luận
 
