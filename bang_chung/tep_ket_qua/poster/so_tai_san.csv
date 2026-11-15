@@ -1,0 +1,2 @@
+tep,cong_cu,mo_hinh,seed,kich_thuoc,prompt,phu_dinh,ngay,quyen,nhan_ai
+nen_48213.png,app/poster.py,sinh_nen v1,48213,1080x1350,data/poster/prompts/nen_v1.txt,data/poster/prompts/phu_dinh.txt,2026-11-16,Nhà trường sở hữu (nền do mã nguồn nội bộ tạo),không

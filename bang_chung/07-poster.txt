@@ -1,0 +1,10 @@
+### Bước 7 — Poster có kiểm chứng — 2026-11-16 01:07:49
+(Windows: FONT_PATH / FONT_BOLD_PATH trỏ tới DejaVuSans trong .venv, xem bao_cao.md)
+
+$ python scripts/tao_poster.py 48213
+poster: out/poster/poster.png
+nen: out/poster/nen_48213.png
+tuong_phan: {'chữ trắng / dải đỏ': 10.7, 'chữ vàng / dải đỏ': 7.0}
+doi_chieu: {'Tên sự kiện': True, 'Ngày': True, 'Giờ': True, 'Địa điểm': True}
+alt: Poster NGÀY HỘI VIỆC LÀM 2026, Thứ Sáu, 13/11/2026 · 8:00 – 16:30, tại Hội trường A – Phòng B201; quét mã để đăng ký trước 12/11 bằng mã QR ở góc phải dưới.
+brief_co_cam_chu_trong_nen: True

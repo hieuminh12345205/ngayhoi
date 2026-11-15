@@ -1,0 +1,16 @@
+### Bước 5 — Dữ liệu tham dự và chỉ số — 2026-11-16 01:07:47
+
+$ python scripts/kiem_tap_nho.py
+Đáp án tính tay      : 50.0
+SQL bản đầu của AI   : 100.0
+SQL TL_LUOT_CO_QUET  : 50.0
+
+$ python scripts/phan_tich.py
+[trung] 3 dòng: 22020012·P09·2; 22020031·P06·2; 22020061·P11·2
+[khong_chuan] 1 dòng: 22020061·p11
+[trong] 1 dòng: 22020038·P07
+[nguoi_la] 1 dòng: 22029999·P04
+TL_LUOT_CO_QUET         69.7%  — Lượt đăng ký có ≥ 1 lần quét (bỏ trùng, chuẩn hóa chữ hoa, loại người lạ) ÷ lượt đăng ký
+TL_LUOT_DUNG_GIO        57.8%  — Lượt có quét và đến muộn ≤ 10 phút (Điều 5; ô trống tính vắng) ÷ lượt đăng ký — dùng xét điểm rèn luyện
+TL_SINH_VIEN_CO_DEN     85.0%  — Sinh viên có quét ít nhất một phiên đã đăng ký ÷ sinh viên đã đăng ký
+Biểu đồ: D:\Python Folder\AI Toolkit\File nộp bài thực hành\TH_23110198\out\bieu_do_ty_le.png

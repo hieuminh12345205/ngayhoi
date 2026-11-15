@@ -1,0 +1,30 @@
+### Bước 3 — RAG có trích dẫn (chế độ offline, không có Ollama) — 2026-11-16 01:07:14
+
+$ python scripts/nhung.py
+Đã nhúng 10 đoạn · chế độ offline · TF-IDF thưa chiều
+
+$ python scripts/tim.py "bỏ phiên hai lần có bị gì không"
+0.625  Điều 4. Hủy đăng ký
+0.253  Điều 3. Sức chứa phiên
+0.129  Điều 2. Đối tượng tham dự
+Ngưỡng (offline): 0.37
+
+$ python scripts/danh_gia_rag.py
+✓ 0.567 Muốn hủy đăng ký thì hạn chót là khi nào? → Điều 4. 
+✓ 0.625 Bỏ phiên hai lần có bị gì không? → Điều 4. 
+✓ 0.399 Đến muộn 15 phút có được tính điểm danh không? → Điều 5. 
+✓ 0.493 Tham gia ngày hội được cộng mấy điểm rèn luyện? → Điều 6. 
+✓ 0.550 CV gửi file Word được không? → Điều 7. 
+✓ 0.551 Có được quay video lúc phỏng vấn không? → Điều 8. 
+✓ 0.495 Sinh viên năm nhất có được đi không? → Điều 2. 
+✓ 0.552 Một phiên nhận tối đa bao nhiêu người? → Điều 3. 
+✓ 0.421 Thông tin đăng ký của em được giữ bao lâu? → Điều 9. 
+✓ 0.505 Điểm danh bị sai thì khiếu nại ở đâu, trong bao lâu? → Điều 10.
+Recall@3: 10/10
+  ngoài phạm vi 0.255  Ngày hội có phát đồ ăn trưa không?
+  ngoài phạm vi 0.236  Gửi xe máy ở đâu?
+  ngoài phạm vi 0.341  Học phí kỳ sau bao nhiêu?
+  ngoài phạm vi 0.209  Thư viện mở cửa mấy giờ?
+  ngoài phạm vi 0.073  Có xe buýt đưa đón không?
+Trong phạm vi: 0.399–0.625 · Ngoài phạm vi: 0.073–0.341
+Khoảng trống 0.341–0.399 → gợi ý ngưỡng 0.37 (đang dùng 0.37)

@@ -1,0 +1,33 @@
+### Bước 1 — API đăng ký (máy chủ bản đúng, ADMIN_KEY=ctsv-2026) — 2026-11-16 01:05:39
+
+# 1) GET /api/trang-thai
+{"llm":"offline","auth":"demo","mo_hinh_sinh":"qwen2.5:3b","mo_hinh_nhung":"bge-m3","so_sinh_vien":120}
+-> HTTP 200
+
+# 2) POST /api/dang-ky  X-Ma-SV: 22020001  {"ma_phien":"P05"}  (lần 1)
+{"ok":true,"ma_sv":"22020001","ma_phien":"P05"}
+-> HTTP 201
+
+# 3) Lặp lại đúng yêu cầu trên (lần 2)
+{"detail":"DA_DANG_KY"}
+-> HTTP 409
+
+# 4) Thân rỗng {}
+{"detail":[{"type":"missing","loc":["body","ma_phien"],"msg":"Field required","input":{}}]}
+-> HTTP 422
+
+# 5) Không có danh tính (thiếu X-Ma-SV)
+{"detail":"CHUA_DANG_NHAP"}
+-> HTTP 401
+
+# 6) GET /api/thong-ke không có khoá quản trị
+{"detail":"CAN_QUYEN_QUAN_TRI"}
+-> HTTP 403
+
+# 7) GET /api/thong-ke với khoá sai
+{"detail":"CAN_QUYEN_QUAN_TRI"}
+-> HTTP 403
+
+# 8) GET /api/thong-ke với X-Admin-Key đúng (rút gọn 400 ký tự đầu)
+{"ho_so":{"trung":[{"ma_sv":"22020012","ma_phien":"P09","so_lan":2},{"ma_sv":"22020031","ma_phien":"P06","so_lan":2},{"ma_sv":"22020061","ma_phien":"P11","so_lan":2}],"khong_chuan":[{"ma_sv":"22020061","ma_phien":"p11"}],"trong":[{"ma_sv":"22020038","ma_phien":"P07"}],"nguoi_la":[{"ma_sv":"22029999","ma_phien":"P04"}]},"chi_so":{"TL_LUOT_CO_QUET":{"dinh_nghia":"Lượt đăng ký có ≥ 1 lần q
+-> HTTP 200

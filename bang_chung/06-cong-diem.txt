@@ -1,0 +1,19 @@
+### Bước 6 — Tự động hoá cộng điểm, chạy lại an toàn — 2026-11-16 01:07:49
+
+$ python scripts/cong_diem.py   # lần 1
+Đủ điều kiện: 44 · cộng mới: 44 · đã cộng trước: 0 · ngoại lệ: 2
+  ngoại lệ: 22020038 P07 THIEU_GIO
+  ngoại lệ: 22029999 P04 KHONG_DANG_KY
+
+$ python scripts/cong_diem.py   # lần 2
+Đủ điều kiện: 44 · cộng mới: 0 · đã cộng trước: 44 · ngoại lệ: 2
+  ngoại lệ: 22020038 P07 THIEU_GIO
+  ngoại lệ: 22029999 P04 KHONG_DANG_KY
+
+$ cat out/ngoai_le.csv
+﻿ma_sv,ma_phien,ly_do
+22020038,P07,THIEU_GIO
+22029999,P04,KHONG_DANG_KY
+
+$ số dòng out/cong_diem.csv (kể cả tiêu đề)
+45

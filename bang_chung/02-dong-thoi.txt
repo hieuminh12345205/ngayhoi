@@ -1,0 +1,18 @@
+### Bước 2 — Thí nghiệm đồng thời — 2026-11-16 01:06:09
+
+## A. BẢN LỖI (MO_PHONG_KHE_HO=1: đếm rồi mới ghi)
+$ python scripts/nap_du_lieu.py
+{'sinh_vien': 120, 'phien': 12, 'dang_ky': 244, 'diem_danh': 174}
+$ MO_PHONG_KHE_HO=1 uvicorn app.main:app   # rồi:  python scripts/ban_dong_thoi.py P10 40
+Phiên P10: còn 15 chỗ · 40 sinh viên bấm cùng lúc → {'201': 17, '409 HET_CHO': 23} · còn -2 chỗ sau
+KHÔNG ĐẠT: vượt sức chứa (2 người)
+
+## B. BẢN ĐÚNG (không đặt MO_PHONG_KHE_HO: INSERT … SELECT … WHERE trong một câu lệnh)
+$ python scripts/nap_du_lieu.py
+{'sinh_vien': 120, 'phien': 12, 'dang_ky': 244, 'diem_danh': 174}
+$ uvicorn app.main:app   # rồi:  python scripts/ban_dong_thoi.py P10 40
+Phiên P10: còn 15 chỗ · 40 sinh viên bấm cùng lúc → {'201': 15, '409 HET_CHO': 25} · còn 0 chỗ sau
+ĐẠT: không vượt sức chứa
+$ python scripts/ban_dong_thoi.py P07 40
+Phiên P07: còn 12 chỗ · 40 sinh viên bấm cùng lúc → {'201': 12, '409 HET_CHO': 28} · còn 0 chỗ sau
+ĐẠT: không vượt sức chứa
