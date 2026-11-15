@@ -15,6 +15,22 @@ ADMIN_KEY=ctsv-2026 uvicorn app.main:app --reload
 ```
 Mở http://localhost:8000 (giao diện) và http://localhost:8000/docs (tài liệu API).
 
+### Lưu ý khi chạy trên Windows
+Hai lỗi gặp khi chạy đúng các lệnh trên ở Windows 11 (Python 3.13), và cách xử lý không cần sửa mã:
+
+| Hiện tượng | Nguyên nhân | Cách xử lý (PowerShell) |
+|---|---|---|
+| `UnicodeEncodeError` khi script in tiếng Việt | Cửa sổ lệnh dùng bảng mã cp1252 | `$env:PYTHONUTF8 = "1"` |
+| `pytest` báo 23/24, `test_poster_tuong_phan_va_doi_chieu` lỗi `OSError: cannot open resource` | `app/poster.py` mặc định đọc phông DejaVu ở đường dẫn Linux `/usr/share/fonts/truetype/dejavu/` | Trỏ `FONT_PATH` và `FONT_BOLD_PATH` tới phông DejaVu đi kèm matplotlib (xem dưới) |
+
+```
+$ttf = ".venv\Lib\site-packages\matplotlib\mpl-data\fonts\ttf"
+$env:FONT_PATH = (Resolve-Path "$ttf\DejaVuSans.ttf").Path
+$env:FONT_BOLD_PATH = (Resolve-Path "$ttf\DejaVuSans-Bold.ttf").Path
+$env:ADMIN_KEY = "ctsv-2026"; uvicorn app.main:app --reload
+```
+PowerShell không nhận cú pháp `BIEN=gia_tri lenh`; đặt biến bằng `$env:BIEN = "..."` trước khi chạy lệnh.
+
 ## Bật mô hình ngôn ngữ cục bộ
 ```
 ollama pull qwen2.5:3b && ollama pull bge-m3
